@@ -2,6 +2,10 @@
 body { background-color: #f0fdfa; color: #134e4a; }
 .app-container { width: 100%; max-width: 480px; margin: 0 auto; height: 100vh; display: flex; flex-direction: column; background: #ffffff; position: relative; box-shadow: 0 0 10px rgba(0,0,0,0.05); }
 
+/* 스킨 테마 적용 */
+.app-container.skin-skin-dark { background: #1e293b; color: #f8fafc; }
+.app-container.skin-skin-space { background: #0f172a; color: #e2e8f0; }
+
 .login-screen { width: 100vw; height: 100vh; background: #0d9488; display: flex; justify-content: center; align-items: center; }
 .login-box { background: white; padding: 32px; border-radius: 20px; text-align: center; display: flex; flex-direction: column; gap: 16px; width: 85%; max-width: 360px; }
 .login-hero-icon { font-size: 4rem; }
@@ -18,85 +22,78 @@ body { background-color: #f0fdfa; color: #134e4a; }
 .avatar-wrap { border-radius: 50%; padding: 2px; }
 .avatar-wrap.frame-gold { border: 3px solid #f59e0b; box-shadow: 0 0 8px #f59e0b; }
 .avatar-wrap.frame-neon { border: 3px solid #06b6d4; box-shadow: 0 0 8px #06b6d4; }
-.avatar-wrap.frame-rainbow { border: 3px solid #ec4899; box-shadow: 0 0 8px #ec4899; }
+.avatar-wrap.frame-diamond { border: 4px solid #3b82f6; box-shadow: 0 0 12px #60a5fa; }
 
 .content-body { flex: 1; overflow-y: auto; padding: 16px; padding-bottom: 75px; }
 .tab-page { display: flex; flex-direction: column; gap: 16px; }
 
-.card-form { background: #f0fdfa; border: 1px solid #99f6e4; padding: 14px; border-radius: 12px; display: flex; flex-direction: column; gap: 10px; }
+.card-form { background: #f0fdfa; border: 1px solid #99f6e4; padding: 14px; border-radius: 12px; display: flex; flex-direction: column; gap: 10px; color: #134e4a; }
 .card-form input, .card-form textarea, .card-form select { padding: 8px; border-radius: 6px; border: 1px solid #cbd5e1; }
 .add-btn { padding: 10px; background: #0d9488; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
 .add-btn.bought { background: #94a3b8; }
 
-.item-card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; }
-.clickable-card { cursor: pointer; transition: transform 0.1s; }
-.clickable-card:hover { border-color: #0d9488; }
+.days-picker { display: flex; gap: 4px; justify-content: space-between; }
+.day-chip { flex: 1; padding: 6px 0; border: 1px solid #cbd5e1; background: white; border-radius: 6px; cursor: pointer; font-size: 0.8rem; }
+.day-chip.active { background: #0d9488; color: white; font-weight: bold; border-color: #0d9488; }
+
+.alarm-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #334155; }
+.alarm-time { font-size: 1.2rem; font-weight: bold; color: #0d9488; }
+.sub-tip { font-size: 0.75rem; color: #64748b; }
+
+.item-card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px; color: #334155; }
 .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.user-clickable { display: flex; align-items: center; gap: 6px; }
+.user-clickable { display: flex; align-items: center; gap: 6px; cursor: pointer; }
 .mini-avatar { width: 28px; height: 28px; border-radius: 50%; }
 .star-rating { font-size: 0.8rem; color: #f59e0b; }
 .badge { background: #ccfbf1; color: #0d9488; padding: 2px 8px; border-radius: 10px; font-weight: bold; font-size: 0.8rem; }
-.card-body-text { margin-bottom: 10px; }
 
 .btn-group-row { display: flex; gap: 6px; margin-top: 6px; }
 .btn-call { flex: 1; padding: 8px; background: #0d9488; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
 .btn-demo-call { padding: 8px; background: #0284c7; color: white; border: none; border-radius: 6px; font-size: 0.75rem; font-weight: bold; cursor: pointer; }
 
-/* 퀘스트 탭 */
-.quest-sub { font-size: 0.85rem; color: #64748b; }
-.quest-list { display: flex; flex-direction: column; gap: 10px; }
-.quest-card { background: white; border: 1px solid #99f6e4; padding: 14px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
-.quest-reward { font-size: 0.8rem; color: #0d9488; font-weight: bold; }
-.quest-btn { padding: 8px 12px; background: #f59e0b; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
-.quest-btn.done { background: #cbd5e1; cursor: default; }
-
-/* 상점 */
-.coin-display-card { background: #fef3c7; padding: 12px; border-radius: 10px; display: flex; justify-content: space-between; color: #b45309; }
-.shop-grid { display: flex; flex-direction: column; gap: 10px; }
-.shop-item-card { background: white; border: 1px solid #e2e8f0; padding: 12px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; }
-.item-cat { font-size: 0.7rem; color: #0d9488; font-weight: bold; }
-.price-tag { font-size: 0.85rem; color: #b45309; font-weight: bold; }
-
-/* 프로필 깔끔한 디자인 */
-.clean-profile-card { background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+/* 프로필 & 인벤토리 */
+.clean-profile-card { background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 16px; color: #334155; }
 .avatar-section { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .large-avatar { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; }
 .upload-btn-clean { padding: 6px 12px; background: #f0fdfa; color: #0d9488; border: 1px solid #0d9488; border-radius: 20px; font-size: 0.8rem; font-weight: bold; cursor: pointer; }
 .profile-info-fields { display: flex; flex-direction: column; gap: 10px; }
 .info-row { display: flex; flex-direction: column; gap: 4px; }
 .info-row label { font-size: 0.75rem; color: #64748b; font-weight: bold; }
-.info-row input, .info-row select, .info-row textarea { padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.9rem; }
+.disabled-input { background: #f1f5f9; color: #94a3b8; }
 
-/* 자르기 모달 수정 */
-.crop-preview-container { width: 100%; height: 160px; background: #000; display: flex; justify-content: center; align-items: center; overflow: hidden; border-radius: 8px; }
-.crop-target-img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.1s; }
-.zoom-control { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; }
+.inventory-section { display: flex; flex-direction: column; gap: 10px; }
+.inventory-grid { display: flex; flex-direction: column; gap: 8px; }
+.inventory-card { background: white; border: 1px solid #cbd5e1; padding: 10px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; color: #334155; }
+.equip-btn { padding: 6px 12px; background: #0d9488; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
+.equip-btn.active { background: #ef4444; }
 
-/* 카페 게시글 모달 */
+/* 자르기 모달 */
+.controls-column { display: flex; flex-direction: column; gap: 8px; font-size: 0.8rem; }
+.crop-preview-container { width: 100%; height: 180px; background: #000; display: flex; justify-content: center; align-items: center; overflow: hidden; border-radius: 8px; }
+.crop-target-img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+/* 상점 */
+.coin-display-card { background: #fef3c7; padding: 12px; border-radius: 10px; display: flex; justify-content: space-between; color: #b45309; }
+.shop-grid { display: flex; flex-direction: column; gap: 10px; }
+.shop-item-card { background: white; border: 1px solid #e2e8f0; padding: 12px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; color: #334155; }
+.item-cat { font-size: 0.7rem; color: #0d9488; font-weight: bold; }
+.price-tag { font-size: 0.85rem; color: #b45309; font-weight: bold; }
+
+/* 모달 공통 */
 .modal-backdrop { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 100; }
-.modal-card { background: white; padding: 20px; border-radius: 16px; width: 88%; max-width: 400px; display: flex; flex-direction: column; gap: 12px; max-height: 85vh; overflow-y: auto; }
-.cafe-header h3 { font-size: 1.1rem; color: #134e4a; }
-.cafe-content { margin: 8px 0; font-size: 0.95rem; line-height: 1.4; }
-.music-tag { font-size: 0.8rem; color: #0d9488; font-weight: bold; margin-top: 8px; }
+.modal-card { background: white; padding: 20px; border-radius: 16px; width: 88%; max-width: 400px; display: flex; flex-direction: column; gap: 12px; max-height: 85vh; overflow-y: auto; color: #334155; }
+
 .comments-section { display: flex; flex-direction: column; gap: 8px; }
 .comments-list { max-height: 120px; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; font-size: 0.85rem; }
 .comment-item { background: #f8fafc; padding: 6px; border-radius: 6px; }
 .comment-input-row { display: flex; gap: 6px; }
 .comment-input-row input { flex: 1; padding: 6px; border: 1px solid #cbd5e1; border-radius: 6px; }
 
-/* 예약 음성 통화 */
-.voice-call-card { text-align: center; align-items: center; }
-.call-animation { width: 80px; height: 80px; background: #ccfbf1; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2.5rem; margin: 0 auto; position: relative; }
-.call-status { font-size: 0.85rem; color: #0d9488; }
-.voice-controls { margin: 10px 0; }
-.voice-btn { padding: 10px 16px; background: #0d9488; color: white; border: none; border-radius: 20px; font-weight: bold; cursor: pointer; }
-.voice-btn.muted { background: #ef4444; }
-
 .btn-close { padding: 8px; background: #64748b; color: white; border: none; border-radius: 8px; cursor: pointer; }
 .btn-close.danger { background: #ef4444; }
 
 /* 하단 네비게이션 */
-.bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; height: 60px; background: #ffffff; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-around; align-items: center; }
-.bottom-nav button { background: none; border: none; display: flex; flex-direction: column; align-items: center; color: #64748b; cursor: pointer; font-size: 0.65rem; }
+.bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; height: 60px; background: #ffffff; border-top: 1px solid #e2e8f0; display: flex; justify-out: space-around; align-items: center; }
+.bottom-nav button { background: none; border: none; display: flex; flex-direction: column; align-items: center; color: #64748b; cursor: pointer; font-size: 0.65rem; width: 16%; }
 .bottom-nav button.active { color: #0d9488; font-weight: bold; }
 .bottom-nav .icon { font-size: 1.1rem; }
