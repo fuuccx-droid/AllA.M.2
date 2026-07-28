@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 export default function App() {
   const [activeTab, setActiveTab] = useState('alarm-feed');
 
+  // 1. 유저 정보 & 프로필 & 장착 아이템
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userProfile, setUserProfile] = useState({
     name: '김알람',
@@ -24,11 +25,12 @@ export default function App() {
 
   const level = Math.floor(userProfile.xp / 100) + 1;
 
+  // 실제 구글 로그인 처리 함수
   const handleGoogleLoginSuccess = (response) => {
     try {
       const base64Url = response.credential.split('.')[1];
       const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+      const jsonPayload = decodeURIComponent(atob(base64.split('').map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)).join(''));
       const payload = JSON.parse(jsonPayload);
 
       setUserProfile(prev => ({
@@ -61,6 +63,7 @@ export default function App() {
     }
   }, [isLoggedIn]);
 
+  // 2. 일일 퀘스트
   const [quests, setQuests] = useState([
     { id: 1, title: '🌅 아침 알람 확인하기', rewardXp: 20, rewardCoin: 100, progress: 1, maxProgress: 1, completed: false },
     { id: 2, title: '✍️ 자유 게시글 1회 작성하기', rewardXp: 30, rewardCoin: 200, progress: 0, maxProgress: 1, completed: false },
@@ -78,6 +81,7 @@ export default function App() {
     }));
   };
 
+  // 3. 프로필 사진 편집
   const [tempImg, setTempImg] = useState(null);
   const [isCropModalOpen, setIsCropModalOpen] = useState(false);
   const [cropZoom, setCropZoom] = useState(1);
@@ -101,10 +105,7 @@ export default function App() {
     setIsCropModalOpen(false);
   };
 
-  const [viewedUserProfile, setViewedUserProfile] = useState(null);
-  const [selectedPost, setSelectedPost] = useState(null);
-  const [commentInput, setCommentInput] = useState('');
-
+  // 4. 모닝콜 피드 & 전화 예약 기능복원
   const [posts, setPosts] = useState([
     {
       id: 1,
@@ -115,7 +116,7 @@ export default function App() {
       reason: '수능 대비 모의고사 풀기',
       music: 'Ditto - 뉴진스',
       comments: [{ id: 1, author: '모닝커피', text: '화이팅입니다!' }],
-      reservations: []
+      reservations: ['미라클모닝er']
     }
   ]);
   const [feedTime, setFeedTime] = useState('06:00');
@@ -140,6 +141,25 @@ export default function App() {
     alert('모닝콜 요청 피드가 등록되었습니다!');
   };
 
+  // 모닝콜 전화 예약 처리
+  const handleReserveCall = (postId, e) => {
+    e.stopPropagation();
+    setPosts(posts.map(p => {
+      if (p.id === postId) {
+        if (p.reservations.includes(userProfile.name)) {
+          alert('이미 모닝콜을 예약하셨습니다.');
+          return p;
+        }
+        alert(`${p.author} 님의 ${p.time} 모닝콜 전화 예약을 완료했습니다!`);
+        // 퀘스트 반영
+        setQuests(quests.map(q => q.id === 3 ? { ...q, progress: 1 } : q));
+        return { ...p, reservations: [...p.reservations, userProfile.name] };
+      }
+      return p;
+    }));
+  };
+
+  // 5. 스톱워치 기능
   const [swTime, setSwTime] = useState(0);
   const [swIsRunning, setSwIsRunning] = useState(false);
   const [swLaps, setSwLaps] = useState([]);
@@ -175,6 +195,7 @@ export default function App() {
     setSwLaps([]);
   };
 
+  // 6. 개인 알람 설정
   const [myAlarms, setMyAlarms] = useState([
     { id: 101, time: '07:00', label: '평일 출근', days: ['월', '화', '수', '목', '금'], enabled: true, preferredMusic: 'NewJeans, K-pop', currentMusic: '✨ AI 추천: Supernova - 에스파' },
   ]);
@@ -224,6 +245,7 @@ export default function App() {
     setAlarmPrefMusic('');
   };
 
+  // 7. 자유게시판
   const [freePosts, setFreePosts] = useState([
     { 
       id: 1, 
@@ -257,6 +279,10 @@ export default function App() {
     alert('게시글이 작성되었습니다!');
   };
 
+  const [viewedUserProfile, setViewedUserProfile] = useState(null);
+  const [selectedPost, setSelectedPost] = useState(null);
+  const [commentInput, setCommentInput] = useState('');
+
   const handleAddComment = () => {
     if (!commentInput.trim() || !selectedPost) return;
     const newComment = { id: Date.now(), author: userProfile.name, text: commentInput };
@@ -272,6 +298,7 @@ export default function App() {
     setCommentInput('');
   };
 
+  // 8. 상점 및 인벤토리
   const shopItems = [
     { id: 'frame-gold-glow', name: '✨ 네온 빛 황금 테두리', price: 500, category: '테두리' },
     { id: 'frame-diamond-aura', name: '💎 다이아몬드 회전 아우라', price: 10000, category: '테두리' },
@@ -350,19 +377,34 @@ export default function App() {
             </form>
 
             <div className="list-group">
-              {posts.map(post => (
-                <div key={post.id} className="item-card">
-                  <div className="card-top">
-                    <div className="user-clickable" onClick={() => setViewedUserProfile(post.authorProfile)}>
-                      <img src={post.authorProfile.avatarUrl} alt="avatar" className="mini-avatar" />
-                      <strong>{post.author}</strong>
-                      <span className="star-rating">⭐ {post.authorProfile.rating}</span>
+              {posts.map(post => {
+                const isReservedByMe = post.reservations?.includes(userProfile.name);
+                return (
+                  <div key={post.id} className="item-card">
+                    <div className="card-top">
+                      <div className="user-clickable" onClick={() => setViewedUserProfile(post.authorProfile)}>
+                        {/* 축소된 프로필 사진 크기 (feed-avatar 클래스) */}
+                        <img src={post.authorProfile.avatarUrl} alt="avatar" className="feed-avatar" />
+                        <strong>{post.author}</strong>
+                        <span className="star-rating">⭐ {post.authorProfile.rating}</span>
+                      </div>
+                      <span className="badge">⏰ {post.time}</span>
                     </div>
-                    <span className="badge">⏰ {post.time}</span>
+                    <p className="card-body-text" onClick={() => setSelectedPost(post)} style={{ cursor: 'pointer' }}>{post.reason}</p>
+                    
+                    {/* 복원된 전화 예약 버튼 및 안내 영역 */}
+                    <div className="feed-action-bar">
+                      <button 
+                        className={`call-reserve-btn ${isReservedByMe ? 'reserved' : ''}`}
+                        onClick={(e) => handleReserveCall(post.id, e)}
+                      >
+                        {isReservedByMe ? '📞 전화 예약 완료' : '📞 모닝콜 전화 예약하기'}
+                      </button>
+                      <small className="reservation-count">예약 {post.reservations?.length || 0}명</small>
+                    </div>
                   </div>
-                  <p className="card-body-text" onClick={() => setSelectedPost(post)} style={{ cursor: 'pointer' }}>{post.reason}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </section>
         )}
