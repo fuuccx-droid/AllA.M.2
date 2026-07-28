@@ -2,50 +2,85 @@
 body { background-color: #f0fdfa; color: #134e4a; }
 .app-container { width: 100%; max-width: 500px; margin: 0 auto; height: 100vh; display: flex; flex-direction: column; background: #ffffff; position: relative; }
 
-/* 구글 로그인 화면 */
 .login-screen { width: 100vw; height: 100vh; background: #0d9488; display: flex; justify-content: center; align-items: center; }
 .login-box { background: white; padding: 32px; border-radius: 20px; text-align: center; display: flex; flex-direction: column; gap: 16px; width: 90%; max-width: 380px; }
-.login-hero-icon { font-size: 4rem; margin: 10px 0; }
+.login-hero-icon { font-size: 4rem; }
 .google-login-btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; background: white; font-weight: bold; cursor: pointer; }
 .google-login-btn img { width: 20px; height: 20px; }
 
-/* 상단 헤더 & 프로필 */
 .top-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #0d9488; color: white; }
-.header-profile { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.header-profile { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.85rem; }
 .header-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
-.lvl { background: #ccfbf1; color: #0d9488; padding: 2px 6px; border-radius: 6px; font-weight: bold; font-size: 0.75rem; }
+.lvl { background: #ccfbf1; color: #0d9488; padding: 2px 6px; border-radius: 6px; font-weight: bold; }
+.coin { background: #fef3c7; color: #b45309; padding: 2px 6px; border-radius: 6px; font-weight: bold; }
 
-/* 프로필 편집 영역 */
+/* 상점 테두리 착용 스타일 */
+.avatar-wrap { border-radius: 50%; padding: 2px; }
+.avatar-wrap.frame-gold { border: 3px solid #f59e0b; box-shadow: 0 0 8px #f59e0b; }
+.avatar-wrap.frame-neon { border: 3px solid #06b6d4; box-shadow: 0 0 8px #06b6d4; }
+
 .content-body { flex: 1; overflow-y: auto; padding: 16px; padding-bottom: 70px; }
-.profile-edit-box { background: #f0fdfa; border: 1px solid #99f6e4; padding: 16px; border-radius: 12px; display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+.tab-page { display: flex; flex-direction: column; gap: 16px; }
+
+.card-form { background: #f0fdfa; border: 1px solid #99f6e4; padding: 14px; border-radius: 12px; display: flex; flex-direction: column; gap: 10px; }
+.card-form input, .card-form textarea, .card-form select { padding: 8px; border-radius: 6px; border: 1px solid #99f6e4; }
+.add-btn { padding: 10px; background: #0d9488; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+.add-btn.bought { background: #94a3b8; }
+
+.time-picker-row { display: flex; gap: 8px; }
+.time-input { font-weight: bold; }
+.text-input { flex: 1; }
+.days-picker { display: flex; gap: 4px; justify-content: space-between; }
+.day-chip { flex: 1; padding: 6px 0; border: 1px solid #99f6e4; border-radius: 6px; background: white; cursor: pointer; font-size: 0.8rem; }
+.day-chip.active { background: #0d9488; color: white; font-weight: bold; }
+.ai-toggle-box { font-size: 0.85rem; color: #0f766e; font-weight: bold; }
+
+.alarm-list { display: flex; flex-direction: column; gap: 10px; }
+.alarm-card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center; }
+.alarm-card.off { opacity: 0.5; background: #f8fafc; }
+.alarm-time { font-size: 1.5rem; font-weight: bold; color: #0d9488; }
+.alarm-label { font-size: 0.85rem; font-weight: bold; }
+.alarm-music { font-size: 0.75rem; color: #0f766e; }
+.alarm-controls { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
+.switch-btn { padding: 4px 10px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; background: #cbd5e1; }
+.switch-btn.active { background: #0d9488; color: white; }
+.ai-switch-btn { padding: 3px 6px; border-radius: 10px; border: none; font-size: 0.7rem; font-weight: bold; cursor: pointer; background: #e2e8f0; }
+.ai-switch-btn.active { background: #f59e0b; color: white; }
+.edit-delete-row { display: flex; gap: 4px; margin-top: 4px; }
+.btn-sm { padding: 2px 6px; font-size: 0.7rem; border: 1px solid #cbd5e1; border-radius: 4px; background: white; cursor: pointer; }
+.btn-sm.del { color: #ef4444; border-color: #fca5a5; }
+
+/* 상점 그리드 */
+.shop-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+.shop-item-card { background: white; border: 1px solid #99f6e4; padding: 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+.price-tag { font-size: 0.8rem; color: #b45309; font-weight: bold; }
+
+/* 프로필 및 자르기 모달 */
+.profile-edit-box { background: #f0fdfa; border: 1px solid #99f6e4; padding: 16px; border-radius: 12px; display: flex; flex-direction: column; gap: 12px; }
 .avatar-picker { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.large-avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #0d9488; }
+.large-avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+.large-avatar.center { margin: 0 auto; }
 .upload-label { background: #0d9488; color: white; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer; }
-.input-field-group { display: flex; flex-direction: column; gap: 6px; }
-.input-field-group input, .input-field-group select { padding: 8px; border-radius: 6px; border: 1px solid #99f6e4; }
+.crop-preview-box { width: 100%; height: 180px; background: #000; display: flex; justify-content: center; align-items: center; overflow: hidden; border-radius: 8px; }
+.crop-preview-img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.crop-tip { font-size: 0.75rem; color: #64748b; text-align: center; }
 
-/* 평점 & 리뷰 스타일 */
-.reviews-section { display: flex; flex-direction: column; gap: 8px; }
-.review-card { background: #f8fafc; border: 1px solid #e2e8f0; padding: 10px; border-radius: 8px; font-size: 0.85rem; }
-.review-head { display: flex; justify-content: space-between; margin-bottom: 4px; }
-.star { color: #f59e0b; font-weight: bold; }
-
-/* 유저 상호작용 버튼 */
+.item-card { background: white; border: 1px solid #99f6e4; border-radius: 12px; padding: 12px; margin-bottom: 8px; }
+.card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
 .user-clickable { display: flex; align-items: center; gap: 6px; cursor: pointer; }
 .mini-avatar { width: 24px; height: 24px; border-radius: 50%; }
+.star-rating { font-size: 0.8rem; color: #f59e0b; font-weight: bold; }
+.badge { background: #ccfbf1; color: #0d9488; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; font-weight: bold; }
 .btn-group-row { display: flex; gap: 6px; margin-top: 8px; }
 .btn-call { flex: 1; padding: 8px; background: #0d9488; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
 .btn-report { padding: 8px; background: #ef4444; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
 
-/* 모달 레이아웃 */
 .modal-backdrop { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 100; }
 .modal-card { background: white; padding: 20px; border-radius: 12px; width: 85%; max-width: 380px; display: flex; flex-direction: column; gap: 10px; }
 .modal-card textarea { height: 70px; padding: 8px; border-radius: 6px; border: 1px solid #cbd5e1; }
-.modal-btn-row { display: flex; gap: 8px; }
-.btn-submit { flex: 1; padding: 8px; background: #0d9488; color: white; border: none; border-radius: 6px; }
-.btn-close, .btn-close-full { padding: 8px; background: #94a3b8; color: white; border: none; border-radius: 6px; }
+.btn-close { padding: 8px; background: #94a3b8; color: white; border: none; border-radius: 6px; cursor: pointer; }
 
-/* 하단 네비게이션 */
 .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 500px; height: 60px; background: #ffffff; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-around; align-items: center; }
-.bottom-nav button { background: none; border: none; display: flex; flex-direction: column; align-items: center; color: #64748b; cursor: pointer; }
+.bottom-nav button { background: none; border: none; display: flex; flex-direction: column; align-items: center; color: #64748b; cursor: pointer; font-size: 0.7rem; }
 .bottom-nav button.active { color: #0d9488; font-weight: bold; }
+.bottom-nav .icon { font-size: 1.2rem; }
